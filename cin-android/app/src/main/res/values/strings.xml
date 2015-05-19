@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CIN</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">Select A Client</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_welcome">Welcome</string>
+    <string name="text_activity_welcome">Welcome</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_new_client">New Client</string>
+    <string name="menu_show_user">My Profile</string>
+    <string name="menu_logout">Logout</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_new_task">New Task</string>
+    <string name="title_activity_preferences">Preferences</string>
+    <string name="title_activity_dialog_error">Error</string>
+    <string name="register">Register</string>
+    <string name="facebook_app_id">1421549748067512</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="confirm">Are you sure you want to complete this action?</string>
+    <string name="save">Save</string>
+    <string name="user_first">First Name</string>
+    <string name="user_last">Last Name</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="user_password_confirmation">Confirm Password</string>
+    <string name="task_title">Task Title</string>
+    <string name="welcome_title">Welcome to CIN!</string>
+    <string name="welcome_text">Please select an option to begin!</string>
+    <string name="register_disclaimer">Your email address will always remain private. By clicking Register you are indicating that you have read and agree to the Terms of Service.</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_new_client">NewClientActivity</string>
+    <string name="client_first">First Name</string>
+    <string name="client_last">Last Name</string>
+    <string name="title_activity_show_client">ShowClientActivity</string>
+    <string name="delete_client">Delete Client</string>
+    <string name="new_client">New Client</string>
+    <string name="title_activity_new_appointment">NewAppointmentActivity</string>
+    <string name="new_appointment_note">Daily Note</string>
+    <string name="new_appointment">New Appointment</string>
+    <string name="title_activity_show_appointment">ShowAppointmentActivity</string>
+    <string name="appointment_created_at">Created at</string>
+    <string name="appointment_note">ShowAppointmentActivity</string>
+    <string name="title_activity_new_location">Map</string>
+    <string name="no_location_detected"> No location detected. Make sure location is enabled on the device.</string>
+    <string name="location_updated_message">Location updated</string>
+    <string name="last_update_time_label">Last location update time: </string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="title_activity_show_location">Map</string>
+    <string name="title_activity_show_user">ShowUserActivity</string>
+    <string name="my_clients">My Clients</string>
+    <string name="welcome">Welcome</string>
+    <string name="duration">Duration: </string>
+    <string name="date">Date: </string>
+    <string name="time">Time: </string>
+    <string name="daily_note">Daily Note: </string>
+    <string name="name">Name: </string>
+    <string name="email">Email: </string>
+    <string name="hours">Hours: </string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+
+</resources>
