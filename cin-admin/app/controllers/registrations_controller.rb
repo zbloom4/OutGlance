@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource
     resource = User.new(user_params)
-    resource.hours = 0
+    resource.hours = 0.0
     if resource.save
       sign_in resource
       render :status => 200,
@@ -26,7 +26,7 @@ class RegistrationsController < Devise::RegistrationsController
   private 
 
   def user_params
-    params.require(:user).permit(:email, :password, :first, :last)
+    params.require(:user).permit(:email, :password, :first, :last, :company_id)
   end
 
 end

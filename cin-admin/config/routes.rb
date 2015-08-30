@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post 'clients/:client_id/appointments/:app_id/locations/create' => 'locations#create'
   get 'clients/:client_id/appointments/:app_id/locations' => 'locations#index', :as => 'locations'
   post 'clients/:client_id/appointments/:id/update' => 'appointments#update'
+  post 'clients/:client_id/update' => 'clients#update'
   delete 'clients/:client_id/appointments/:app_id/delete' => 'appointments#delete'
 
   # The priority is based upon order of creation: first created -> highest priority.

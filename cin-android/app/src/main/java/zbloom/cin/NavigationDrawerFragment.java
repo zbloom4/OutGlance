@@ -74,6 +74,10 @@ public class NavigationDrawerFragment extends Fragment {
                     intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                 }
+                else if (position == 2){
+                    intent = new Intent(getActivity(), TodaysAppointmentsActivity.class);
+                    startActivity(intent);
+                }
             }
 
             @Override
@@ -87,8 +91,8 @@ public class NavigationDrawerFragment extends Fragment {
 }
     public static List getData(){
         List<Navigation> navigation = new ArrayList<>();
-        int[] icons = {R.drawable.ic_action_person, R.drawable.ic_action_cc_bcc};
-        String[] titles = {"My Profile", "My Clients"};
+        int[] icons = {R.drawable.ic_action_person, R.drawable.ic_action_cc_bcc, R.drawable.ic_action_event};
+        String[] titles = {"My Profile", "My Clients", "Today's Appointments"};
 
         for (int i = 0; i < titles.length && i < icons.length; i++){
             Navigation current = new Navigation();

@@ -33,6 +33,32 @@
             <requestFocus />
         </EditText>
 
+        <EditText
+            android:id="@+id/clientAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/client_address"
+            android:inputType="textMultiLine" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/ReturnedImageView"
+            android:layout_width="271dp"
+            android:layout_height="314dp" />
+
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_photo_camera_black_24dp"
+            android:onClick="onTakePicture"/>
+
 
         <com.melnykov.fab.FloatingActionButton
             android:id="@+id/fab"
@@ -40,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_action_new"
+            android:src="@drawable/ic_add_black_24dp"
             android:onClick="onSaveClient"/>
     </LinearLayout>
 

@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import zbloom.cin.R;
 import zbloom.cin.models.Navigation;
+import zbloom.cin.R;
 
 /**
  * Created by bloom on 4/26/15.

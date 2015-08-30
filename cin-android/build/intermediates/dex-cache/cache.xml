@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.0/libs/internal_impl-21.0.0.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-ba171c281e23b5dafef242a13e46546f48bae049.jar" />
+        sha1="5a8e01742aee890c56fe638ea7c921b91a3fdc62">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-7c757c3c1796f6878b2677826af9b8916f0eccfd.jar" />
     </item>
     <item
-        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/classes.jar"
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-464bde0d41d1ed1c879d27e090d5021bef57ba12.jar" />
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-63b3125560c627dc0f40ec53158702841b5a0e56.jar" />
     </item>
     <item
-        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.1.0/classes.jar"
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="80434c45861675a57d690fba5ca31c3d55c89489">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-d3d1dcd8281adf78df10a9062ea91f308f99d62c.jar" />
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-a9380dc8d1a743942c409347555d4eddbf84a541.jar" />
     </item>
     <item
-        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jar="/Users/bloom/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.3.6/cf8bacbf0d476c7f2221f861269365b66447f7ec/httpmime-4.3.6.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-8f54032f01e35ccf752a412c87db23da20301011.jar" />
+        sha1="cf8bacbf0d476c7f2221f861269365b66447f7ec">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/httpmime-4.3.6-ffeaeba1b7c7c4531cb4410007dc3ff18fcc6390.jar" />
     </item>
     <item
-        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.4/classes.jar"
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="87405405e403de68f4057757b8a2e8de02bd65d0">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-21443c6fb860c72be7c8b70ecd0ab2eb3eb1f10a.jar" />
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-b0829f8ef7377ae79af3dd390bd533793a8e9f26.jar" />
     </item>
     <item
         jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.0/libs/internal_impl-22.1.0.jar"
@@ -44,11 +44,25 @@
         <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.0-4c2acd5a2ef3fb29d866b6b2047a1e0264cee55d.jar" />
     </item>
     <item
-        jar="/Users/bloom/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/library-2.4.0-21810e544e6ecc0e4a3f0246f1ae5d4e1dcdd94b.jar" />
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-37c96806190c529889bc2f42124e1ba0297fdf2b.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="eeebabdfd8203f6ab639ccea4ffa1f20e1adee3a">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-400e9680c652bf8dba680e91de7e3420f87030bd.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-f33a6f883c6446bf2dec689a6c6b66d1aa7188a2.jar" />
     </item>
     <item
         jar="/Users/bloom/Programs/Android/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/22.1.0/support-annotations-22.1.0.jar"
@@ -58,6 +72,20 @@
         <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.0-eb5d6c9c4b9c09e9794b894bc9fd125e73bcecbb.jar" />
     </item>
     <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-1cdd4b9d4e4ecc2c7dcc7e4dcc7dd8ca1fd49ade.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.0/libs/internal_impl-22.1.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="025cb89f2896c63200ff4c2e6c467a95691d880a">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.0-242860ba24709392a1c66e6777dff9749099eb31.jar" />
+    </item>
+    <item
         jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.0/libs/internal_impl-21.0.0.jar"
         jumboMode="false"
         revision="22.0.0"
@@ -65,11 +93,18 @@
         <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-526f33dc71afea30c3373eac554d814a0a314cca.jar" />
     </item>
     <item
-        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.github.ksoichiro/android-observablescrollview/1.2.0/classes.jar"
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.0/libs/internal_impl-22.1.0.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="17c84f5220b1d832229762a86a842b4d5f92a3bd">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-247dd52067e3c12fd0b3f2cad44295a7c5ce21be.jar" />
+        sha1="025cb89f2896c63200ff4c2e6c467a95691d880a">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.0-16c2a88a6a14f47b426b0f4e9b420bf4bc138a48.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="66fd9d179eb79b64c99e555dead32e725792217a">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-fa11f8f20c5bea232e6303a768dbf70376c2c848.jar" />
     </item>
     <item
         jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.0/classes.jar"
@@ -79,11 +114,46 @@
         <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-7c270fd44c68280a3061983b65077bef3f501b93.jar" />
     </item>
     <item
-        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.4/classes.jar"
         jumboMode="false"
-        revision="20.0.0"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-8f54032f01e35ccf752a412c87db23da20301011.jar" />
+        revision="22.0.0"
+        sha1="87405405e403de68f4057757b8a2e8de02bd65d0">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-dcebfc8a7a2a9c14464e4c041ba12614ee4cf299.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="0c0c19759e5868604a3b4c2c0074ee9404d73c76">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-a2ebba6b38a1043c83a2df0534aa98bc4da2756f.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-bc4c7ef3ab78fd944fd9f4755200f8cb70fd4f36.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="983e2f375504bc04def18e709c35192afe92e65f">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-6588d9f5501a0e5188d2976c02e810d8a26a6fcf.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-e10ee436b59094dbc4f045ffcb38d23cba18e3df.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/me.tatarka.support/jobscheduler/0.1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="8d5fa4ca32cbbd491d4e027d16f02e897dfed0f2">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-573f4823118836347462abf70808fd86ccd0cc0b.jar" />
     </item>
     <item
         jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/classes.jar"
@@ -91,6 +161,237 @@
         revision="22.0.0"
         sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
         <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-75334ffeb61f195344af974c2caa2beb61aeeaa8.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-e98bcabe8e833be891cf0af7e27ec850c93aabbb.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/gson-2.2.4-6c4ef00a56aced57b8727fdb897b218240b889f0.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-db54acf7c90a14b0a06d77187ba3ec989f5953df.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-4af592ed409ca5140fb011bd8159ef00cc9a49fb.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-ba171c281e23b5dafef242a13e46546f48bae049.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-42d3590b603a8c5f14247c2c75b5fb37960f09e9.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
+        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-464bde0d41d1ed1c879d27e090d5021bef57ba12.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="eeebabdfd8203f6ab639ccea4ffa1f20e1adee3a">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-9c5ca155910f18eb61895026df6c4f5e042f73e8.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="80434c45861675a57d690fba5ca31c3d55c89489">
+        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-d3d1dcd8281adf78df10a9062ea91f308f99d62c.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-5bf571670d20a362008ba545e0faf18b588af350.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b6f3fd41dae8c43531192af02ddf5429a1c44446">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-9e9741130b33f8ff21f0536dc0ed2c2ac499083a.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-8f54032f01e35ccf752a412c87db23da20301011.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-8654eef5dd894c927f853bfe53951f510d2f8160.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-273700c3705e960532c867758fd37393ff8e08f3.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-57c20913a05876c8ec4759d99075e0d9df39e641.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-2f644b8a64adbe850f385e4071612c9ccb47e2d9.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.4/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="87405405e403de68f4057757b8a2e8de02bd65d0">
+        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-21443c6fb860c72be7c8b70ecd0ab2eb3eb1f10a.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/commons-io-2.4-ef4faa9739d4d6e128761947fb583fecd167f3c7.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-8ef894b00e8e186d6abeacf99d89f6eff39b8095.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/library-2.4.0-21810e544e6ecc0e4a3f0246f1ae5d4e1dcdd94b.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/1.4.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="9a8f72f9b47a264e209aa6d236f03ff833d508c9">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-98e61a6ac8aaef8feb56dbd2c2f1e6ad586618e8.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-621978d4fa9ae28c527faf1514d980accf2c1865.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.1/f5aa318bda4c6c8d688c9d00b90681dcd82ce636/httpcore-4.4.1.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="f5aa318bda4c6c8d688c9d00b90681dcd82ce636">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/httpcore-4.4.1-e4add55997d784257abf45d5ef0208148429f520.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-65fc0a3001468f76d377362a57b4759d09ddd15a.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-74e2bd9c379f0284dc3eedd07955141cab94cb6c.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-7636edb56616a8df47b0799c338319f8e261f33f.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.1.0/libs/internal_impl-22.1.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="50c645d80504c40e34e6bb88360b9a5c1df99b0b">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.0-cbb1e640e2feee95c3ca36faf9c49ad611c23775.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-8f1e020099b49a6ad3bf73be60ecdeed50c1361f.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="80434c45861675a57d690fba5ca31c3d55c89489">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-0e5682050b36754c22331a4985fccdd73a691280.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/pre-dexed/debug/classes-8f54032f01e35ccf752a412c87db23da20301011.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-4996849e4d5f6567869ec7552807bb8aad1fa9f2.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/cin/cin-android/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.4/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="87405405e403de68f4057757b8a2e8de02bd65d0">
+        <dex dex="/Users/bloom/Work/cin/cin-android/app/build/intermediates/pre-dexed/debug/classes-eb3f067f0aabc76536be2282a6d675422c11c698.jar" />
+    </item>
+    <item
+        jar="/Users/bloom/Work/TechBiz-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="80434c45861675a57d690fba5ca31c3d55c89489">
+        <dex dex="/Users/bloom/Work/TechBiz-android/app/build/intermediates/pre-dexed/debug/classes-d8f31b94c76bb2bfc5427fb0444f07b023852cc4.jar" />
     </item>
     <item
         jar="/Users/bloom/Programs/Android/cin-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.0/classes.jar"

@@ -1,16 +1,20 @@
 package zbloom.cin.models;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by bloom on 3/2/15.
  */
 public class Client {
-    private String first, last;
+    private String first, last, address, image;
     private int id;
 
-    public Client(String first, String last, Integer id) {
+    public Client(String first, String last, Integer id, String address, String image) {
         this.first = first;
         this.last = last;
         this.id = id;
+        this.address = address;
+        this.image = image;
     }
 
     public String getFirst() {
@@ -41,4 +45,19 @@ public class Client {
         return first + " " + last;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

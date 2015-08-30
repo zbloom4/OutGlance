@@ -2,19 +2,22 @@ package zbloom.cin;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.gc.materialdesign.views.ButtonRectangle;
 
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends Activity{
 
     protected ButtonRectangle mRegisterButton;
     protected ButtonRectangle mLoginButton;
+    Integer companyID = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,6 @@ public class WelcomeActivity extends Activity {
 
         mRegisterButton = (ButtonRectangle) findViewById(R.id.registerButton);
         mLoginButton = (ButtonRectangle) findViewById(R.id.loginButton);
-
     }
 
     @Override
@@ -37,11 +39,13 @@ public class WelcomeActivity extends Activity {
 
     public void LoginButtonHandler(View view){
         Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+        intent.putExtra("CompanyID", companyID);
         startActivity(intent);
     }
 
     public void RegisterButtonHandler(View view){
         Intent intent = new Intent(WelcomeActivity.this, RegisterActivity.class);
+        intent.putExtra("CompanyID", companyID);
         startActivity(intent);
     }
 

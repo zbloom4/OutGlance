@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :clients
+  belongs_to :company
 
   def update_hours(hours)
   	total_hours = (self.hours * 3600) + hours

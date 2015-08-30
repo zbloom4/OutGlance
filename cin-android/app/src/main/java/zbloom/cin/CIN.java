@@ -24,15 +24,22 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import zbloom.cin.adapters.NavigationAdapter;
 import zbloom.cin.libs.UrlJsonAsyncTask;
 import zbloom.cin.models.API;
-
+import zbloom.cin.models.Appointment;
 import zbloom.cin.models.Navigation;
+
 import zbloom.cin.models.User;
 
 
@@ -73,7 +80,7 @@ public class CIN extends ActionBarActivity {
             loadUserFromAPI(api.getSHOW_USER_URL());
         }
         else {
-            Intent intent = new Intent(CIN.this, WelcomeActivity.class);
+            Intent intent = new Intent(CIN.this, LoginActivity.class);
             startActivityForResult(intent, 0);
         }
     }
@@ -92,6 +99,58 @@ public class CIN extends ActionBarActivity {
 
         @Override
         protected JSONObject doInBackground(String... urls) {
+            JSONObject json = new JSONObject();
+            StringBuffer response = new StringBuffer();
+            URL url = null;
+            try {
+                url = new URL(urls[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                //connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects(false);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("X-User-Email", mPreferences.getString("UserEmail", ""));
+                connection.setRequestProperty("X-User-Token", mPreferences.getString("AuthToken", ""));
+                connection.setUseCaches(false);
+
+                //DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+
+                json.put("success", false);
+                json.put("info", "Something went wrong. Retry!");
+                // add the user email and password to
+                // the params
+
+                //wr.writeBytes(holder.toString());
+
+                //wr.flush();
+                //wr.close();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (connection.getInputStream())));
+
+                String output = "";
+                System.out.println("Output from Server .... \n");
+                while ((output = br.readLine()) != null) {
+                    response.append(output);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                json = new JSONObject(response.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return json;
+            /*
             DefaultHttpClient user = new DefaultHttpClient();
             HttpGet get = new HttpGet(urls[0]);
             String response = null;
@@ -123,6 +182,7 @@ public class CIN extends ActionBarActivity {
                 Log.e("JSON", "" + e);
             }
             return json;
+            */
         }
         @Override
         protected void onPostExecute(JSONObject json) {
@@ -146,7 +206,7 @@ public class CIN extends ActionBarActivity {
                 e1.printStackTrace();
             }
             if (check.length() == 0){
-                Intent intent = new Intent(CIN.this, WelcomeActivity.class);
+                Intent intent = new Intent(CIN.this, LoginActivity.class);
                 startActivityForResult(intent, 0);
             }
             else{
@@ -193,38 +253,42 @@ public class CIN extends ActionBarActivity {
 
         @Override
         protected JSONObject doInBackground(String... urls) {
-            DefaultHttpClient client = new DefaultHttpClient();
-            HttpDelete delete = new HttpDelete(urls[0]);
-            JSONObject holder = new JSONObject();
-            JSONObject userObj = new JSONObject();
-            String response = null;
             JSONObject json = new JSONObject();
 
+            URL url = null;
             try {
-                try {
-                    json.put("success", false);
-                    json.put("info", "Something went wrong. Retry!");
-                    delete.setHeader("Accept", "application/json");
-                    delete.setHeader("Content-Type", "application/json");
-                    delete.setHeader("X-User-Email", mPreferences.getString("UserEmail", ""));
-                    delete.setHeader("X-User-Token", mPreferences.getString("AuthToken", ""));
+                url = new URL(urls[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                //connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects(false);
+                connection.setRequestMethod("DELETE");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("X-User-Email", mPreferences.getString("UserEmail", ""));
+                connection.setRequestProperty("X-User-Token", mPreferences.getString("AuthToken", ""));
+                connection.setUseCaches(false);
 
-                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                    response = client.execute(delete, responseHandler);
-                    json = new JSONObject(response);
+                json.put("success", false);
+                json.put("info", "Something went wrong. Retry!");
 
-                } catch (HttpResponseException e) {
-                    e.printStackTrace();
-                    Log.e("ClientProtocol", "" + e);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("IO", "" + e);
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (connection.getInputStream())));
+
+                String output;
+                System.out.println("Output from Server .... \n");
+                while ((output = br.readLine()) != null) {
+                    json = new JSONObject(output);
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.e("JSON", "" + e);
             }
-
             return json;
         }
 
@@ -237,7 +301,7 @@ public class CIN extends ActionBarActivity {
                     editor.commit();
 
                     Intent intent = new Intent(CIN.this,
-                            WelcomeActivity.class);
+                            LoginActivity.class);
                     startActivityForResult(intent, 0);
                 }
                 Toast.makeText(context, json.getString("info"),
@@ -258,10 +322,10 @@ public class CIN extends ActionBarActivity {
     }
 
     public static List getData(){
-        int[] icons = {R.drawable.ic_action_about, R.drawable.ic_action_person, R.drawable.ic_action_email, R.drawable.ic_action_time};
-        String[] titles = {user.getID()+"", user.getName(), user.getEmail(), String.format("%.3f", user.getHours()) + " hours"};
+        int[] icons = { R.drawable.ic_action_person, R.drawable.ic_action_email, R.drawable.ic_action_time};
+        String[] titles = { user.getName(), user.getEmail(), String.format("%.3f", user.getHours()) + " hours"};
         List<Navigation> navigation = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 3; i++){
             Navigation current = new Navigation();
             current.setIconID(icons[i]);
             current.setTitle(titles[i]);
@@ -283,7 +347,6 @@ public class CIN extends ActionBarActivity {
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawerLayout), toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.userList);
-
 
         mNavigationAdapter = new NavigationAdapter(CIN.this, getData());
         recyclerView.setAdapter(mNavigationAdapter);

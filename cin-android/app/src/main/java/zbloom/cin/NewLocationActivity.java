@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
@@ -37,7 +37,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -46,6 +52,7 @@ import zbloom.cin.models.API;
 
 public class NewLocationActivity extends FragmentActivity implements
         ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
+
 
     protected static final String TAG = "location-updates-sample";
 
@@ -172,6 +179,7 @@ public class NewLocationActivity extends FragmentActivity implements
      */
     protected synchronized void buildGoogleApiClient() {
         Log.i(TAG, "Building GoogleApiClient");
+        //createLocationRequest();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -231,13 +239,12 @@ public class NewLocationActivity extends FragmentActivity implements
                 .setMessage("Are you sure you want to check out?")
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface arg0, int arg1) {
                         if (mRequestingLocationUpdates) {
                             mRequestingLocationUpdates = false;
                             setButtonsEnabledState();
                             stopLocationUpdates();
-                            Intent intent = new Intent(NewLocationActivity.this, UpdateAppointmentActivity.class);
+                            Intent intent = new Intent(NewLocationActivity.this, NewSignatureActivity.class);
                             intent.putExtra("ClientID", clientID);
                             intent.putExtra("AppointmentID", appointmentID);
                             startActivity(intent);
@@ -297,6 +304,58 @@ public class NewLocationActivity extends FragmentActivity implements
 
         @Override
         protected JSONObject doInBackground(String... urls) {
+            JSONObject holder = new JSONObject();
+            JSONObject taskObj = new JSONObject();
+            JSONObject json = new JSONObject();
+
+            URL url = null;
+            try {
+                url = new URL(urls[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects(false);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("X-User-Email", mPreferences.getString("UserEmail", ""));
+                connection.setRequestProperty("X-User-Token", mPreferences.getString("AuthToken", ""));
+                connection.setUseCaches(false);
+
+                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+
+                json.put("success", false);
+                json.put("info", "Something went wrong. Retry!");
+                // add the user email and password to
+                // the params
+                taskObj.put("latitude", mLatitude);
+                taskObj.put("longitude", mLongitude);
+                holder.put("location", taskObj);
+
+                wr.writeBytes(holder.toString());
+
+                wr.flush();
+                wr.close();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (connection.getInputStream())));
+
+                String output;
+                System.out.println("Output from Server .... \n");
+                while ((output = br.readLine()) != null) {
+                    json = new JSONObject(output);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return json;
+            /*
             DefaultHttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(urls[0]);
             JSONObject holder = new JSONObject();
@@ -335,6 +394,7 @@ public class NewLocationActivity extends FragmentActivity implements
             }
 
             return json;
+            */
         }
     }
 
@@ -355,8 +415,7 @@ public class NewLocationActivity extends FragmentActivity implements
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
             mMap.setMyLocationEnabled(true);
         }
             // Check if we were successful in obtaining the map.
@@ -440,11 +499,13 @@ public class NewLocationActivity extends FragmentActivity implements
      */
     @Override
     public void onLocationChanged(Location location) {
-        mCurrentLocation = location;
-        mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-        updateUI();
-        Toast.makeText(this, getResources().getString(R.string.location_updated_message),
-                Toast.LENGTH_SHORT).show();
+        if (mCurrentLocation.distanceTo(location) > 100) {
+            mCurrentLocation = location;
+            mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+            updateUI();
+            Toast.makeText(this, getResources().getString(R.string.location_updated_message),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -475,12 +536,12 @@ public class NewLocationActivity extends FragmentActivity implements
                             mRequestingLocationUpdates = false;
                             setButtonsEnabledState();
                             stopLocationUpdates();
-                            Intent intent = new Intent(NewLocationActivity.this, UpdateAppointmentActivity.class);
+                            Intent intent = new Intent(NewLocationActivity.this, NewSignatureActivity.class);
                             intent.putExtra("ClientID", clientID);
                             intent.putExtra("AppointmentID", appointmentID);
                             startActivity(intent);
                         } else {
-                            deleteAppointmentFromAPI();
+                            //deleteAppointmentFromAPI();
                             NewLocationActivity.super.onBackPressed();
                         }
                     }

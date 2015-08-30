@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       <title>Community Integration Network</title>
+       <link rel="stylesheet" href="css/style.css"/>
+	   <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+       <link href='http://fonts.googleapis.com/css?family=Wellfleet' rel='stylesheet' type='text/css'>
+	   <link href='http://fonts.googleapis.com/css?family=Wellfleet' rel='stylesheet' type='text/css'>
+	   <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>	
+	   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	   <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css'>
+	<script>
+   
+<!----- JQUERY FOR SLIDING NAVIGATION --->   
+$(document).ready(function() {
+  $('a[href*=#]').each(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+    && location.hostname == this.hostname
+    && this.hash.replace(/#/,'') ) {
+      var $targetId = $(this.hash), $targetAnchor = $('[name=' + this.hash.slice(1) +']');
+      var $target = $targetId.length ? $targetId : $targetAnchor.length ? $targetAnchor : false;
+       if ($target) {
+         var targetOffset = $target.offset().top;
+
+<!----- JQUERY CLICK FUNCTION REMOVE AND ADD CLASS "ACTIVE" + SCROLL TO THE #DIV--->   
+         $(this).click(function() {
+            $("#nav li a").removeClass("active");
+            $(this).addClass('active');
+           $('html, body').animate({scrollTop: targetOffset}, 1000);
+           return false;
+         });
+      }
+    }
+  });
+
+});
+
+
+</script>
+
+<script type="text/javascript">
+ function showhide(id) {
+    var e = document.getElementById(id);
+    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+ }
+</script>
+
+ </head> 
+	
+<body>
+
+<!----- HEADER START--->   
+<header id="header">
+<div class="content">
+<div id="logo"><a href=""> Community Integration Network </a></div>
+
+<nav id="nav">
+	<ul>
+		<li><a href="#slide1" class="active" title="Next Section" >Home</a></li>
+		<li><a href="#slide2" title="Next Section">Our Work</a></li>
+		<li><a href="#slide3" title="Next Section">Testimonials</a></li>
+		<li><a href="#slide4" title="Next Section">Employment</a></li>
+		<li><a href="#slide5" title="Next Section">Contact Us</a></li>
+		<li><a href="/cin">Login</a></li>
+	</ul>
+</nav>
+</div>
+</header>	
+<!----- HEADER END--->   
+
+<!----- SLIDES START --->   	
+	<div id="slide1">
+		<div class="content">
+
+            <h1>Supported Living Services</h1>
+            <div id="divider"> </div>
+		    <h2>Be Independent</h2>
+		</div> 
+    </div> 
+
+	<div id="slide2">
+		<div class="content" >
+			<h2>Our Work</h2>
+			<img src="img/cin_logo.jpg" align="center"/>
+			<div class="content_container" >
+			    <h5>Service Perspective</h5>
+			    <h4>Supported living services are to assist adults with developmental disabilities move toward a desirable personal future. The key elements are to help people discover and move toward a vision, create opportunities and deliver support to reach their personal goal. This may include learning to live with others if that is the desired arrangement, making connections with neighbors and the larger community, having emotional support when needed, making decisions, developing competencies, growing relationships and crisis management.
+			    <a href="javascript:showhide('servicePerspective')">
+       			Read more about our service perspective
+    			</a>
+    			<div id="servicePerspective" style="display:none;">
+
+					Supported living services originate in the individual’s hopes, dreams and needs. Adults with developmental disabilities and their families are asking for help with:
+
+					<ul>
+						<li>Coordinating medical services, making and keeping doctor’s appointments</li>
+						<li>Recruiting congenial housemates</li>
+						<li>Performing limited property management</li>
+						<li>If sharing, helping house mates divide up tasks equitable and get along with one another</li>
+						<li>Advocating for (and coordinating with) in-home support and other generic services</li>
+						<li>General problem solving / Crisis intervention</li>
+						<li>Budgeting goals, banking, preparing meals</li>
+						<li>Establishing circles of support - groups of family, friends and neighbors, who assist the person in reaching his or her goals, often by assisting as volunteers or by linking the focus person with church groups, clubs, community college classes, counseling center, etc.</li>
+					</ul>
+				</div>
+				</h4>
+			</div>
+			<div class="content_container" >
+				<h5>Personal Assistance Services</h5>
+
+				<h4>Personal assistance services are typically furnished in the consumer’s home, focused on support in tasks vital to living in the community, but which the consumer cannot perform independently.
+
+				These services may include, but are not limited to:
+				<a href="javascript:showhide('personalAssistanceServices')">
+       			Read more about our personal assistance services
+    			</a>
+    			<div id="personalAssistanceServices" style="display:none;">
+				
+					<ul>
+						<li>Personal financial management</li>
+						<li>Correspondence with official agencies</li>
+						<li>Meal planning and preparation</li>
+						<li>Personal health and hygiene</li>
+						<li>Home and community safety</li>
+						<li>Nonmedical services needed to maintain the home in a clean and safe environment</li>
+						<li>Activities essential to the health and welfare of the consumer</li>
+						<li>Activities of daily living</li>
+						<li>The health and care of children</li>
+						<li>The recruitment, screening and supervision of attendants</li>
+					</ul>
+				</div>
+				</h4>
+			</div>
+
+			<div class="content_container" >
+				<h5>Personal Future Planning/Assessment</h5>
+
+				<h4>A personal support planning and assessment may be arranged to plan what types of support a person needs and/or desires to lead a self-determined life style while maintaining themselves safely and happily.  Then planing and Assessment helps discover options, both paid and unpaid, which could enable a person to maximize their autonomy and life satisfaction. Assessment and Planning will help determine what “people supports” and “technological supports” can fill specific needs of the consumer. 
+				<a href="javascript:showhide('personalAssessment')">
+       			Read more about our personal future planning/assessment
+    			</a>
+    			<div id="personalAssessment" style="display:none;">
+					Some areas of determination may include: personal assistance like dressing, eating, bathing, toileting, positioning and exercise to rehabilitation service, recreational and social services, support for the consumer to become active in the community and social activities.  Also, a plan to include roommates, friends, co-workers, even people like the teller at the bank, all become potential supports identified for assisting the person in all kinds of things.  Many of these supports identified evolve slowly over time and take concerted effort to grow into  beneficial natural community supports.
+				</div>
+				</h4>
+			</div>
+
+			<div class="content_container" >
+				<h5>Training & Habilitation Services</h5>
+
+				<h4>Training and habilitation services are furnished in natural settings - home or community.  The focus is the acquisition, retention and improvement of adaptive skills and behaviors vital to living in the community.  (Instruction and a time-limited nature of training and habilitation services distinguish this from previously described Personal Assistance Services.)
+
+				<a href="javascript:showhide('trainingServices')">
+       			Read more about our training and habiliation services
+    			</a>
+    			<div id="trainingServices" style="display:none;">
+
+					These services may include, but are not limited to:
+
+					<ul>
+						<li>Instruction in community resource awareness and assistance</li> 
+						<li>Orientation to the community</li>
+						<li>Mobility training</li>
+						<li>Care and repair of durable medical equipment</li>
+						<li>Access to leisure activities and use of leisure time.</li>
+						<li>Interpersonal communication skills</li>
+						<li>Adaptive social skills</li>
+						<li>Financial management</li>
+						<li>Correspondence</li>
+						<li>Meal preparation</li>
+						<li>Self-advocacy</li>
+						<li>Marital and sexual relationships</li>
+						<li>Parenting skills</li>
+						<li>Screening, hiring, firing, and evaluation personal attendants</li>
+						<li>Training in the use and maintenance of a 24-hour emergency assistance system</li>
+						<li>Training in personal advocacy and circles of support</li>
+					</ul<
+				</div>
+				</h4>
+			</div>
+
+			<div class="content_container" >
+				<h5>24 Hour Emergency Assistance Service</h5>
+				<h4>On an individual basis, CIN will assist in designing a 24-hour emergency response system in a  consumer’s residence.  24-hour emergency services are individually tailored to the strengths and capabilities of the consumer and responsive to both Urgent Assistance and Crisis Assistance needs.  
+				</h4>
+			</div>
+
+			<div class="content_container" >
+				<h5>Assistive/Adaptive Equipment</h5>
+				<h4>Asistance/adaptive equipment services enable the individual to live in a supported living arrangement; to gain physical access to community services; to be mobile and have greater independence in the home of their choice and their community; and to have access to devices, controls and appliances that increase their productivity, independence and community integration.
+				<a href="javascript:showhide('assistiveEquipment')">
+       			Read more about our assistive/adaptive equipment
+    			</a>
+    			<div id="assistiveEquipment" style="display:none;">
+
+					Services may include, but are not limited:
+
+					<ul>
+						<li>Collaborative exploration with the consumer to determine needs for adaptive equipment</li>
+						<li>Training in the selection and use of assistive technology and adaptive equipment</li>
+						<li>Repair and maintenance of assistive technology and adaptive equipment</li>
+						<li>Crafting of unique technology and equipment by rehabilitation experts</li>
+						<li>Communication devices</li>
+						<li>Home modification</li>
+					</ul>
+				</div>
+				</h4>
+			</div>
+
+			<div class="content_container" >
+			    <h5>Community Support</h5>
+			    <h4>Community support services occur primarily outside the consumer’s home.  The focus is on facilitation, support and assistance to access the larger community, generic agencies, and local buiness resources.  
+				
+				<a href="javascript:showhide('communitySupport')">
+       			Read more about our community support
+    			</a>
+    			<div id="communitySupport" style="display:none;">
+				    Support services could include, but are not limited to:
+				    <ul>
+						<li>Self-advocacy</li>
+						<li>Establishing and maintaining relationships between consumers an other members of the community, neighbors, family and friends</li>
+						<li>Participation in community recreation</li>
+						<li>Aid in landlord disputes</li>
+						<li>Obtaining low-income housing vouchers</li>
+						<li>Mobility training</li>
+						<li>Transportation to community events</li>
+						<li>Facilitating circles of support</li>
+					</ul>
+				</div
+				</h4>
+			</div>
+		</div> 
+    </div> 
+	
+	
+   <div id="slide3">
+		<div class="content">
+			<h1>Testimonials Coming Soon</h5>
+		</div> 
+    </div> 
+	
+	
+	<div id="slide4">
+		<div class="content">
+        	<h1>Employment</h1>
+        	<h2> Want to work for us?
+	        	<form action="py/form2.py/email"
+					method="post" enctype="multipart/form-data">
+					<input type="hidden" name="name" value="CIN" / >
+					<input type="hidden" name="email" value="bballruler@gmail.com" / >
+					<input type="hidden" name="comment" value="Comment" />
+					<input type="file" name="attachment" />
+					<input type="hidden" name="subject" value="From the feedback form" / >
+					<input type="hidden" name="redirect" value="http://www.ec2-52-25-91-70.us-west-2.compute.amazonaws.com/index.html" / >
+					<button type="submit">Send</button>
+				</form>
+			</h2>
+		</div> 
+    </div> 
+	
+	
+	<div id="slide5">
+		<div class="content">
+            <h1>Contact Us</h1>
+            <h2>Community Integration Network, Inc.</h2>
+            <h2> 1461 E. Cooley Dr., Ste. 260</h2>
+            <h2>Telephone (909)825-7132</h2>
+        	<h2>Fax (909)825-1742</h2>
+		</div>
+    </div> 
+	
+<!----- SLIDES END --->
+
+</body>
+</html>

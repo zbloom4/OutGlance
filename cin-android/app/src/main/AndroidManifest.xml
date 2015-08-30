@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="zbloom.cin">
+    package="zbloom.cin" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -12,7 +12,16 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
@@ -22,63 +31,120 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="orientation|keyboardHidden"
         android:icon="@drawable/ic_cin"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:largeHeap="true"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".CIN"
-            android:label="@string/app_name">
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter android:label="CIN" >
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ShowClientActivity"
-            android:label="@string/title_activity_show_client"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_show_client"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
-            android:label="@string/title_activity_splash"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_splash"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-            android:noHistory="true" >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_login"
+            android:noHistory="true"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".WelcomeActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_welcome"
-            android:noHistory="true"></activity>
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register"
-            android:noHistory="true"></activity>
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NewClientActivity"
-            android:label="@string/title_activity_new_client"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_new_client"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UpdateAppointmentActivity"
-            android:label="@string/title_activity_new_appointment"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_new_appointment"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ShowAppointmentActivity"
-            android:label="@string/title_activity_show_appointment"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_show_appointment"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyAAzH_wMz01XqqJf10CrfylYHh4pfT_uXw" />
 
         <activity
             android:name=".NewLocationActivity"
-            android:label="@string/title_activity_new_location"></activity>
+            android:label="@string/title_activity_new_location" />
         <activity
             android:name=".ShowLocationActivity"
-            android:label="@string/title_activity_show_location"></activity>
+            android:label="@string/title_activity_show_location" />
+
+        <service
+            android:name=".JobSchedulerService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name=".NewSignatureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_new_signature"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ShowClientProfileActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_show_client_profile"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".NewAppointmentActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_new_appointment"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".TodaysAppointmentsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_todays_appointments"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" >
+        </activity>
     </application>
 
 </manifest>

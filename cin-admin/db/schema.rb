@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402234144) do
+ActiveRecord::Schema.define(version: 20150607002341) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 20150402234144) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "hours"
+    t.datetime "beginning"
+    t.datetime "end"
+    t.datetime "clockIn"
+    t.datetime "clockOut"
+    t.string   "image"
   end
 
   add_index "appointments", ["client_id"], name: "index_appointments_on_client_id"
@@ -65,6 +70,12 @@ ActiveRecord::Schema.define(version: 20150402234144) do
   end
 
   add_index "clients", ["user_id"], name: "index_clients_on_user_id"
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "locations", force: true do |t|
     t.float    "latitude"
@@ -94,9 +105,11 @@ ActiveRecord::Schema.define(version: 20150402234144) do
     t.string   "first"
     t.string   "last"
     t.float    "hours"
+    t.integer  "company_id"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"
+  add_index "users", ["company_id"], name: "index_users_on_company_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

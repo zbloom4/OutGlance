@@ -5,7 +5,7 @@ package zbloom.cin.models;
  */
 public class API {
 
-    public String ip_address = "ec2-54-69-53-113.us-west-2.compute.amazonaws.com/cin/";
+    public String ip_address = "ec2-52-25-91-70.us-west-2.compute.amazonaws.com/";
     public Integer client_id = 0;
     public Integer appointment_id = 0;
 
@@ -17,12 +17,23 @@ public class API {
     public String REGISTER_API_ENDPOINT_URL = "http://" + ip_address + "registrations";
     public String SHOW_USER_URL = "http://" + ip_address + "sessions";
 
+    public String SHOW_CLIENT_PROFILE_URL = "";
     public String DELETE_APPOINTMENT_URL = "";
     public String SHOW_CLIENT_URL = "";
     public String CREATE_APPOINTMENT_URL = "";
     public String SHOW_APPOINTMENT_URL = "";
     public String CREATE_LOCATION_URL = "";
     public String UPDATE_APPOINTMENT_URL = "";
+    public String UPDATE_CLIENT_URL = "";
+
+
+    public void setUPDATE_CLIENT_URL() {
+        UPDATE_CLIENT_URL = "http://" + ip_address + "clients/" + client_id.toString() + "/update.json";
+    }
+
+    public void setSHOW_CLIENT_PROFILE_URL() {
+        SHOW_CLIENT_PROFILE_URL = "http://" + ip_address + "clients/" + client_id.toString() + "/show.json";
+    }
 
     public void setSHOW_APPOINTMENT_URL() {
         SHOW_APPOINTMENT_URL = "http://" + ip_address + "clients/" + client_id.toString() + "/appointments/" + appointment_id.toString() + "/show.json";
@@ -117,4 +128,8 @@ public class API {
     public String getSHOW_USER_URL() {
         return SHOW_USER_URL;
     }
+
+    public String getSHOW_CLIENT_PROFILE_URL() {return SHOW_CLIENT_PROFILE_URL; }
+
+    public String getUPDATE_CLIENT_URL() {return UPDATE_CLIENT_URL; }
 }

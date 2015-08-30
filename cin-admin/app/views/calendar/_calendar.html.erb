@@ -1,0 +1,17 @@
+<%= month_calendar events: appointments do |date, appointments| %>
+  <%= date %>
+
+  <% appointments.each do |appointment| %>
+    <% clients.each do |client| %>
+      <% if client.id == appointment.client_id && appointment.clockIn && appointment.clockOut%>
+	    <div>
+	    <%= "#{client.first} #{client.last}: #{appointment.clockIn.strftime("%r")} - #{appointment.clockOut.strftime("%r")}" %>
+	    </div>
+	  <% end %>
+	<% end %>
+  <% end %>
+<% end %>
+
+<a href="#" onclick="window.print();return false;">
+print me
+</a>

@@ -52,8 +52,8 @@
     <string name="no_location_detected"> No location detected. Make sure location is enabled on the device.</string>
     <string name="location_updated_message">Location updated</string>
     <string name="last_update_time_label">Last location update time: </string>
-    <string name="check_in">Check In</string>
-    <string name="check_out">Check Out</string>
+    <string name="check_in">Clock In</string>
+    <string name="check_out">Clock Out</string>
     <string name="title_activity_show_location">Map</string>
     <string name="title_activity_show_user">ShowUserActivity</string>
     <string name="my_clients">My Clients</string>
@@ -67,6 +67,32 @@
     <string name="hours">Hours: </string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="done">Done</string>
+    <string name="clear">Clear</string>
+    <string name="client_address">Client Address</string>
+    <string name="new_appointment_date">Appointment Date</string>
+    <string name="new_appointment_time">Appointment Time</string>
+    <string name="new_appointment_beginning">Appointment Beginning</string>
+    <string name="new_appointment_end">Appointment End</string>
+
+
+    <string name="goals_prompt">Choose a goal</string>
+
+    <string-array name="goals_array">
+        <item>Home/Disaster Preparation</item>
+        <item>Taking Care of Yourself and Your Home</item>
+        <item>Communication</item>
+        <item>Community/Social Life</item>
+        <item>Work/Career/Education</item>
+        <item>Transportation</item>
+        <item>Personal/Emotional Growth</item>
+        <item>Health/Medical</item>
+        <item>Safety/SIRs</item>
+    </string-array>
+    <string name="title_activity_new_signature">NewSignatureActivity</string>
+    <string name="title_activity_show_client_profile">ShowClientProfileActivity</string>
+    <string name="title_activity_todays_appointments">TodaysAppointmentsActivity</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

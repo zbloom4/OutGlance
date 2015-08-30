@@ -23,7 +23,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 import zbloom.cin.libs.UrlJsonAsyncTask;
 import zbloom.cin.models.API;
@@ -36,14 +43,15 @@ public class LoginActivity extends Activity {
     private String mUserPassword;
     private API api = new API();
     protected ButtonRectangle mLoginButton;
+    Integer mCompanyID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mLoginButton = (ButtonRectangle) findViewById(R.id.loginButton);
-
-
+        final Bundle extras = getIntent().getExtras();
+        //mCompanyID = extras.getInt("CompanyID");
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
     }
 
@@ -72,7 +80,60 @@ public class LoginActivity extends Activity {
 
         @Override
         protected JSONObject doInBackground(String... urls) {
-            DefaultHttpClient client = new DefaultHttpClient();
+            //DefaultHttpClient client = new DefaultHttpClient();
+            JSONObject holder = new JSONObject();
+            JSONObject userObj = new JSONObject();
+            String response = null;
+            JSONObject json = new JSONObject();
+
+            URL url = null;
+            try {
+                url = new URL(urls[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects(false);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setUseCaches(false);
+
+                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+
+                json.put("success", false);
+                json.put("info", "Something went wrong. Retry!");
+                // add the user email and password to
+                // the params
+                userObj.put("email", mUserEmail);
+                userObj.put("password", mUserPassword);
+                userObj.put("company_id", mCompanyID);
+                holder.put("user", userObj);
+
+                wr.writeBytes(holder.toString());
+
+                wr.flush();
+                wr.close();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (connection.getInputStream())));
+
+                String output;
+                System.out.println("Output from Server .... \n");
+                while ((output = br.readLine()) != null) {
+                    json = new JSONObject(output);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return json;
+        }
+        /*
             HttpPost post = new HttpPost(urls[0]);
             JSONObject holder = new JSONObject();
             JSONObject userObj = new JSONObject();
@@ -89,6 +150,7 @@ public class LoginActivity extends Activity {
                     // the params
                     userObj.put("email", mUserEmail);
                     userObj.put("password", mUserPassword);
+                    userObj.put("company_id", mCompanyID);
                     holder.put("user", userObj);
                     StringEntity se = new StringEntity(holder.toString());
                     post.setEntity(se);
@@ -116,6 +178,7 @@ public class LoginActivity extends Activity {
 
             return json;
         }
+        */
 
         @Override
         protected void onPostExecute(JSONObject json) {

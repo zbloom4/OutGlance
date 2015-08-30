@@ -1,11 +1,6 @@
 package zbloom.cin;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.widget.DrawerLayout;
@@ -14,15 +9,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.apache.http.client.HttpResponseException;
@@ -37,16 +29,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import zbloom.cin.adapters.NavigationAdapter;
 import zbloom.cin.libs.UrlJsonAsyncTask;
 import zbloom.cin.models.API;
 import zbloom.cin.models.Appointment;
-import zbloom.cin.models.Client;
 import zbloom.cin.models.Navigation;
 
 public class ShowClientActivity extends ActionBarActivity {
@@ -82,7 +81,7 @@ public class ShowClientActivity extends ActionBarActivity {
             api.setSHOW_CLIENT_URL();
             loadAppointmentsFromAPI(api.getSHOW_CLIENT_URL());
         } else {
-            Intent intent = new Intent(ShowClientActivity.this, WelcomeActivity.class);
+            Intent intent = new Intent(ShowClientActivity.this, LoginActivity.class);
             startActivityForResult(intent, 0);
         }
     }
@@ -92,8 +91,16 @@ public class ShowClientActivity extends ActionBarActivity {
         for (int i = 0; i < appointments.size(); i++){
             Navigation current = new Navigation();
             current.setIconID(R.drawable.ic_action_event);
-            current.setTitle(appointments.get(i).getDate());
-            navigation.add(current);
+            String beginning = appointments.get(i).getBeginning();
+            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, y hh:mm aa");
+            //Date date = new Date(appointments.get(i).getYear(beginning), appointments.get(i).getMonth(beginning), appointments.get(i).getDay(beginning), appointments.get(i).getHour(beginning), appointments.get(i).getMinute(beginning));
+            GregorianCalendar gCal = new GregorianCalendar(appointments.get(i).getYear(beginning), appointments.get(i).getMonth(beginning) - 1, appointments.get(i).getDay(beginning), appointments.get(i).getHour(beginning), appointments.get(i).getMinute(beginning));
+            sdf.setCalendar(gCal);
+            String dateTime = sdf.format(gCal.getTime());
+            current.setTitle(dateTime);
+            if (gCal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)){
+                navigation.add(current);
+            }
         }
         return navigation;
     }
@@ -106,6 +113,13 @@ public class ShowClientActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void onClickClientProfile(View view)
+    {
+        Intent intent = new Intent(this, ShowClientProfileActivity.class);
+        intent.putExtra("ClientID", clientID);
+        startActivity(intent);
+    }
+
     private void deleteClientFromAPI(String url) {
         DeleteClient deleteClient = new DeleteClient(ShowClientActivity.this);
         deleteClient.setMessageLoading("Deleting client...");
@@ -114,12 +128,16 @@ public class ShowClientActivity extends ActionBarActivity {
     }
 
     public void onClickNewAppointment(View view) throws InterruptedException {
-
+        Intent intent = new Intent(this, NewAppointmentActivity.class);
+        intent.putExtra("ClientID", clientID);
+        startActivity(intent);
+        /*
         CreateAppointment createAppointment = new CreateAppointment(ShowClientActivity.this);
         createAppointment.setMessageLoading("Creating new appointment...");
         api.setClient_id(clientID);
         api.setCREATE_APPOINTMENT_URL();
         createAppointment.execute(api.getCREATE_APPOINTMENT_URL());
+        */
     }
 
 
@@ -170,7 +188,8 @@ public class ShowClientActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, ShowClientProfileActivity.class);
+        intent.putExtra("ClientID", clientID);
         startActivity(intent);
     }
 
@@ -188,42 +207,63 @@ public class ShowClientActivity extends ActionBarActivity {
 
         @Override
         protected JSONObject doInBackground(String... urls) {
-            DefaultHttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet(urls[0]);
-            String response = null;
             JSONObject json = new JSONObject();
-
+            StringBuffer response = new StringBuffer();
+            URL url = null;
             try {
-                try {
-                    json.put("success", false);
-                    json.put("info", "Something went wrong. Retry!");
-                    get.setHeader("Accept", "application/json");
-                    get.setHeader("Content-Type", "application/json");
-                    get.setHeader("X-User-Email", mPreferences.getString("UserEmail", ""));
-                    get.setHeader("X-User-Token", mPreferences.getString("AuthToken", ""));
+                url = new URL(urls[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                //connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects(false);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("X-User-Email", mPreferences.getString("UserEmail", ""));
+                connection.setRequestProperty("X-User-Token", mPreferences.getString("AuthToken", ""));
+                connection.setUseCaches(false);
 
-                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                    response = client.execute(get, responseHandler);
-                    json = new JSONObject(response);
+                //DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 
-                } catch (HttpResponseException e) {
-                    e.printStackTrace();
-                    Log.e("ClientProtocol", "" + e);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("IO", "" + e);
+                json.put("success", false);
+                json.put("info", "Something went wrong. Retry!");
+                // add the user email and password to
+                // the params
+
+                //wr.writeBytes(holder.toString());
+
+                //wr.flush();
+                //wr.close();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (connection.getInputStream())));
+
+                String output = "";
+                System.out.println("Output from Server .... \n");
+                while ((output = br.readLine()) != null) {
+                    response.append(output);
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.e("JSON", "" + e);
             }
-
+            try {
+                json = new JSONObject(response.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return json;
         }
         @Override
         protected void onPostExecute(JSONObject json) {
             Integer length;
-            String created_at = "";
+            String beginning = "";
+            String end = "";
             String note = "";
             String date = "";
             String month = "";
@@ -231,21 +271,24 @@ public class ShowClientActivity extends ActionBarActivity {
             String year = "";
             String dateTime[];
             Integer id;
+            //Integer client_id;
             try {
                 JSONArray jsonAppointments = json.getJSONObject("data").getJSONObject("client").getJSONArray("appointments");
                 length = jsonAppointments.length();
                 for (int i = 0; i < length; i++) {
                     JSONObject jsonAppointment = jsonAppointments.getJSONObject(i).getJSONObject("appointment");
-                    created_at = jsonAppointment.getString("created_at");
+                    beginning = jsonAppointment.getString("beginning");
+                    end = jsonAppointment.getString("end");
                     note = jsonAppointment.getString("note");
                     id = jsonAppointment.getInt("id");
-                    dateTime = created_at.split("T");
+                    //client_id = jsonAppointment.getInt("client_id");
+                    dateTime = beginning.split("T");
                     date = dateTime[0];
                     dateTime = date.split("-");
                     month = dateTime[1];
                     day = dateTime[2];
                     year = dateTime[0];
-                    Appointment appointment = new Appointment(note, month + "/" + day + "/" + year, created_at, 0.0, "", id);
+                    Appointment appointment = new Appointment(id, 0, note, beginning, end, "", "", 0.0, "", "");
                     appointments.add(appointment);
                 }
             }
@@ -360,38 +403,42 @@ public class ShowClientActivity extends ActionBarActivity {
 
         @Override
         protected JSONObject doInBackground(String... urls) {
-            DefaultHttpClient client = new DefaultHttpClient();
-            HttpDelete delete = new HttpDelete(urls[0]);
-            JSONObject holder = new JSONObject();
-            JSONObject userObj = new JSONObject();
-            String response = null;
             JSONObject json = new JSONObject();
 
+            URL url = null;
             try {
-                try {
-                    json.put("success", false);
-                    json.put("info", "Something went wrong. Retry!");
-                    delete.setHeader("Accept", "application/json");
-                    delete.setHeader("Content-Type", "application/json");
-                    delete.setHeader("X-User-Email", mPreferences.getString("UserEmail", ""));
-                    delete.setHeader("X-User-Token", mPreferences.getString("AuthToken", ""));
+                url = new URL(urls[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                //connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects(false);
+                connection.setRequestMethod("DELETE");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("X-User-Email", mPreferences.getString("UserEmail", ""));
+                connection.setRequestProperty("X-User-Token", mPreferences.getString("AuthToken", ""));
+                connection.setUseCaches(false);
 
-                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                    response = client.execute(delete, responseHandler);
-                    json = new JSONObject(response);
+                json.put("success", false);
+                json.put("info", "Something went wrong. Retry!");
 
-                } catch (HttpResponseException e) {
-                    e.printStackTrace();
-                    Log.e("ClientProtocol", "" + e);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("IO", "" + e);
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (connection.getInputStream())));
+
+                String output;
+                System.out.println("Output from Server .... \n");
+                while ((output = br.readLine()) != null) {
+                    json = new JSONObject(output);
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.e("JSON", "" + e);
             }
-
             return json;
         }
 
@@ -404,7 +451,7 @@ public class ShowClientActivity extends ActionBarActivity {
                     editor.commit();
 
                     Intent intent = new Intent(ShowClientActivity.this,
-                            WelcomeActivity.class);
+                            LoginActivity.class);
                     startActivityForResult(intent, 0);
                 }
                 Toast.makeText(context, json.getString("info"),
