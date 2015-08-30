@@ -5,7 +5,7 @@ package zbloom.cin.models;
  */
 public class API {
 
-    public String ip_address = "ec2-52-25-91-70.us-west-2.compute.amazonaws.com/";
+    public String ip_address = "ec2-54-69-53-113.us-west-2.compute.amazonaws.com/";
     public Integer client_id = 0;
     public Integer appointment_id = 0;
 
