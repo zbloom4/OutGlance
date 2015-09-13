@@ -3,6 +3,9 @@ package zbloom.cin;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +14,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.util.Base64;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -64,6 +69,7 @@ import zbloom.cin.libs.UrlJsonAsyncTask;
 import zbloom.cin.models.API;
 import zbloom.cin.models.Appointment;
 import zbloom.cin.models.Navigation;
+import zbloom.cin.models.OfflineData;
 
 
 public class UpdateAppointmentActivity extends ActionBarActivity {
@@ -72,6 +78,7 @@ public class UpdateAppointmentActivity extends ActionBarActivity {
     private Editable mNote;
     private File file;
     private String path;
+    private Boolean isInternet;
     int clientID = 0;
     int appointmentID = 0;
     private API api = new API();
@@ -80,6 +87,7 @@ public class UpdateAppointmentActivity extends ActionBarActivity {
     private NavigationAdapter mNavigationAdapter;
     private String[] goals;
     private String tasks;
+    private String note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,16 +97,53 @@ public class UpdateAppointmentActivity extends ActionBarActivity {
         final Bundle extras = getIntent().getExtras();
         clientID = extras.getInt("ClientID");
         appointmentID = extras.getInt("AppointmentID");
+        isInternet = extras.getBoolean("noInternet");
+        if (isInternet){
+            note = extras.getString("mNote");
+        }
+
         path = Environment.getExternalStorageDirectory() + "/signature.png";
         file = new File(path);
 
-        final EditText noteField = (EditText) findViewById(R.id.appointmentNote);
+        EditText noteField = (EditText) findViewById(R.id.appointmentNote);
+        noteField.setText(note);
 
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
 
         goals = getResources().getStringArray(R.array.goals_array);
 
         setUp();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    public void internetDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Boolean isConnected = isNetworkAvailable();
+                        if (isConnected) {
+                            arg0.dismiss();
+                        } else {
+                            arg0.dismiss();
+                            Intent intent = new Intent(UpdateAppointmentActivity.this, UpdateAppointmentActivity.class);
+                            intent.putExtra("ClientID", clientID);
+                            intent.putExtra("AppointmentID", appointmentID);
+                            intent.putExtra("noInternet", true);
+                            EditText noteField = (EditText) findViewById(R.id.appointmentNote);
+                            intent.putExtra("mNote", noteField.getText().toString());
+                            startActivityForResult(intent, 0);
+                        }
+                    }
+                }).create().show();
     }
 
     public void updateAppointment(View button) {
@@ -109,7 +154,7 @@ public class UpdateAppointmentActivity extends ActionBarActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         EditText noteField = (EditText) findViewById(R.id.appointmentNote);
-                        mNote =  noteField.getText();
+                        mNote = noteField.getText();
 
                         Log.d("note", mNote.toString());
 
@@ -121,12 +166,21 @@ public class UpdateAppointmentActivity extends ActionBarActivity {
                             return;
                         } else {
                             // everything is ok!
-                            UpdateAppointment updateAppointment = new UpdateAppointment(UpdateAppointmentActivity.this);
-                            updateAppointment.setMessageLoading("Updating appointment...");
-                            api.setClient_id(clientID);
-                            api.setAppointment_id(appointmentID);
-                            api.setUPDATE_APPOINTMENT_URL();
-                            updateAppointment.execute(api.getUPDATE_APPOINTMENT_URL());
+                            Boolean isConnected = isNetworkAvailable();
+                            if (isConnected) {
+                                ArrayList<Location> Locations = OfflineData.getInstance().getLocations();
+                                if (Locations != null) {
+                                    sendLocations();
+                                }
+                                UpdateAppointment updateAppointment = new UpdateAppointment(UpdateAppointmentActivity.this);
+                                updateAppointment.setMessageLoading("Updating appointment...");
+                                api.setClient_id(clientID);
+                                api.setAppointment_id(appointmentID);
+                                api.setUPDATE_APPOINTMENT_URL();
+                                updateAppointment.execute(api.getUPDATE_APPOINTMENT_URL());
+                            } else {
+                                internetDialog();
+                            }
                         }
                     }
                 }).create().show();
@@ -153,6 +207,87 @@ public class UpdateAppointmentActivity extends ActionBarActivity {
         }
         */
     }
+    private void sendLocations(){
+        SendLocations sendLocations = new SendLocations(UpdateAppointmentActivity.this);
+        api.setClient_id(clientID);
+        api.setAppointment_id(appointmentID);
+        api.setCREATE_LOCATION_URL();
+        sendLocations.execute(api.getCREATE_LOCATION_URL());
+    }
+
+    private class SendLocations extends UrlJsonAsyncTask {
+        public SendLocations(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            JSONObject holder = new JSONObject();
+            JSONObject taskObj = new JSONObject();
+            JSONObject json = new JSONObject();
+            ArrayList<Location> Locations = OfflineData.getInstance().getLocations();
+            double mLatitude;
+            double mLongitude;
+
+            for (int i = 0; i < Locations.size(); i++) {
+                /**
+                 * Requests location updates from the FusedLocationApi.
+                 */
+                mLatitude = Locations.get(i).getLatitude();
+                mLongitude = Locations.get(i).getLongitude();
+                URL url = null;
+                try {
+                    url = new URL(urls[0]);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoOutput(true);
+                    connection.setDoInput(true);
+                    connection.setInstanceFollowRedirects(false);
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setRequestProperty("Accept", "application/json");
+                    connection.setRequestProperty("X-User-Email", mPreferences.getString("UserEmail", ""));
+                    connection.setRequestProperty("X-User-Token", mPreferences.getString("AuthToken", ""));
+                    connection.setUseCaches(false);
+
+                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+
+                    json.put("success", false);
+                    json.put("info", "Something went wrong. Retry!");
+                    // add the user email and password to
+                    // the params
+                    taskObj.put("latitude", mLatitude);
+                    taskObj.put("longitude", mLongitude);
+                    taskObj.put("created_at", Locations.get(i).getTime());
+                    holder.put("location", taskObj);
+
+                    wr.writeBytes(holder.toString());
+
+                    wr.flush();
+                    wr.close();
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (connection.getInputStream())));
+
+                    String output;
+                    System.out.println("Output from Server .... \n");
+                    while ((output = br.readLine()) != null) {
+                        json = new JSONObject(output);
+                    }
+                } catch (IOException e) {
+                    return json;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //}
+            }
+            return json;
+        }
+    }
+
 
     private class UpdateAppointment extends UrlJsonAsyncTask {
         public UpdateAppointment(Context context) {

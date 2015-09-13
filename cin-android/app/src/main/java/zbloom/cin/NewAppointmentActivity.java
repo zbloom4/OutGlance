@@ -212,6 +212,12 @@ public class NewAppointmentActivity extends ActionBarActivity implements OnTimeS
     public void onClickNewAppointment(View view) throws InterruptedException {
         CreateAppointment createAppointment = new CreateAppointment(NewAppointmentActivity.this);
         createAppointment.setMessageLoading("Creating new appointment...");
+        if (beginningHour.isEmpty() || beginningMinute.isEmpty() || endHour.isEmpty() || endMinute.isEmpty() || date.isEmpty()){
+            Toast.makeText(this,
+                    "Please enter date, beginning time and end time of appointment",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
         if (isUpdate == true) {
             api.setClient_id(clientID);
             api.setAppointment_id(appointmentID);

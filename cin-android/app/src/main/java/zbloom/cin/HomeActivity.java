@@ -3,6 +3,7 @@ package zbloom.cin;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
@@ -11,9 +12,12 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -135,13 +139,15 @@ public class HomeActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
 
-        if (mPreferences.contains("AuthToken")) {
+        Boolean isConnected = isNetworkAvailable();
+        if (mPreferences.contains("AuthToken") && isConnected) {
             loadClientsFromAPI(api.getCLIENTS_URL());
             //Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
             //startActivityForResult(intent, 0);
         } else {
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            startActivityForResult(intent, 0);
+            internetDialog();
+            //Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            //startActivityForResult(intent, 0);
         }
     }
 
@@ -162,6 +168,31 @@ public class HomeActivity extends ActionBarActivity {
         intent.putExtra("isUpdate", false);
         intent.putExtra("clientID", 0);
         startActivityForResult(intent, 0);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void internetDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Boolean isConnected = isNetworkAvailable();
+                        if (isConnected) {
+                            arg0.dismiss();
+                        } else {
+                            arg0.dismiss();
+                            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                            startActivityForResult(intent, 0);
+                        }
+                    }
+                }).create().show();
     }
 
     private void loadClientsFromAPI(String url) {

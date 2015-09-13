@@ -116,7 +116,7 @@
     <orderEntry type="library" exported="" name="play-services-games-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="httpmime-4.3.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-7.0.0" level="project" />
-    <orderEntry type="library" exported="" name="httpcore-4.4.1" level="project" />
+    <orderEntry type="library" exported="" name="httpcore-4.4.2" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.1.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-22.1.0" level="project" />

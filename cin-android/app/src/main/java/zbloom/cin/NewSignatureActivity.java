@@ -15,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.gc.materialdesign.views.ButtonRectangle;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -99,7 +101,6 @@ public class NewSignatureActivity extends ActionBarActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         try
-
                         {
                             bitmap = Bitmap.createBitmap(gestureView.getDrawingCache());
                             file.createNewFile();
@@ -109,11 +110,7 @@ public class NewSignatureActivity extends ActionBarActivity {
                             // ignored for PNG, and out stream
                             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
                             fos.close();
-                        } catch (
-                                Exception e
-                                )
-
-                        {
+                        } catch(Exception e) {
                             e.printStackTrace();
                         }
 
@@ -125,6 +122,7 @@ public class NewSignatureActivity extends ActionBarActivity {
                             Intent intent = new Intent(NewSignatureActivity.this, UpdateAppointmentActivity.class);
                             intent.putExtra("ClientID", clientID);
                             intent.putExtra("AppointmentID", appointmentID);
+                            intent.putExtra("noInternet", false);
                             startActivity(intent);
                         } else
 
@@ -134,6 +132,7 @@ public class NewSignatureActivity extends ActionBarActivity {
                             Intent intent = new Intent(NewSignatureActivity.this, UpdateAppointmentActivity.class);
                             intent.putExtra("ClientID", clientID);
                             intent.putExtra("AppointmentID", appointmentID);
+                            intent.putExtra("noInternet", false);
                             startActivity(intent);
                         }
                     }

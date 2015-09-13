@@ -1,8 +1,12 @@
 package zbloom.cin;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -75,12 +79,19 @@ public class ShowClientActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
 
-        if (mPreferences.contains("AuthToken")) {
-            appointments.clear();
-            api.setClient_id(clientID);
-            api.setSHOW_CLIENT_URL();
-            loadAppointmentsFromAPI(api.getSHOW_CLIENT_URL());
-        } else {
+        Boolean isConnected = isNetworkAvailable();
+        if (mPreferences.contains("AuthToken")){
+            if (isConnected) {
+                appointments.clear();
+                api.setClient_id(clientID);
+                api.setSHOW_CLIENT_URL();
+                loadAppointmentsFromAPI(api.getSHOW_CLIENT_URL());
+            }
+            else{
+                internetDialog();
+            }
+        }
+        else {
             Intent intent = new Intent(ShowClientActivity.this, LoginActivity.class);
             startActivityForResult(intent, 0);
         }
@@ -191,6 +202,32 @@ public class ShowClientActivity extends ActionBarActivity {
         Intent intent = new Intent(this, ShowClientProfileActivity.class);
         intent.putExtra("ClientID", clientID);
         startActivity(intent);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void internetDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("No Internet Connection")
+                .setMessage("Please check your internet connection")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Boolean isConnected = isNetworkAvailable();
+                        if (isConnected) {
+                            arg0.dismiss();
+                        } else {
+                            arg0.dismiss();
+                            Intent intent = new Intent(ShowClientActivity.this, ShowClientActivity.class);
+                            intent.putExtra("ClientID", clientID);
+                            startActivityForResult(intent, 0);
+                        }
+                    }
+                }).create().show();
     }
 
     private void loadAppointmentsFromAPI(String url) {

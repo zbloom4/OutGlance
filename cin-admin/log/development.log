@@ -16,3 +16,23 @@
   [1m[36mClient Load (1.4ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
   [1m[35mClient Load (0.2ms)[0m  SELECT "clients".* FROM "clients"
   [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36mClient Load (1.5ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (1.3ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (1.4ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (1.4ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (1.4ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"

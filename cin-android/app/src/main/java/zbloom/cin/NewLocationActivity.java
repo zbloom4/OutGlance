@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
@@ -32,8 +31,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -47,10 +44,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import zbloom.cin.libs.UrlJsonAsyncTask;
 import zbloom.cin.models.API;
+import zbloom.cin.models.OfflineData;
 
 public class NewLocationActivity extends FragmentActivity implements
         ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
@@ -116,6 +115,8 @@ public class NewLocationActivity extends FragmentActivity implements
     Integer appointmentID = 0;
     Integer clientID = 0;
 
+    ArrayList<Location> Locations = new ArrayList<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,9 +128,12 @@ public class NewLocationActivity extends FragmentActivity implements
         clientID = extras.getInt("ClientID");
         appointmentID = extras.getInt("AppointmentID");
 
+        Locations.clear();
+
         // Locate the UI widgets.
         mCheckInButton = (ButtonRectangle) findViewById(R.id.check_in_button);
         mCheckoutButton = (ButtonRectangle) findViewById(R.id.check_out_button);
+        mCheckoutButton.setEnabled(false);
 
         mRequestingLocationUpdates = false;
         mLastUpdateTime = "";
@@ -246,6 +250,9 @@ public class NewLocationActivity extends FragmentActivity implements
                             mRequestingLocationUpdates = false;
                             setButtonsEnabledState();
                             stopLocationUpdates();
+                            if (!Locations.isEmpty()) {
+                                OfflineData.getInstance().setLocations(Locations);
+                            }
                             Intent intent = new Intent(NewLocationActivity.this, NewSignatureActivity.class);
                             intent.putExtra("ClientID", clientID);
                             intent.putExtra("AppointmentID", appointmentID);
@@ -258,9 +265,111 @@ public class NewLocationActivity extends FragmentActivity implements
                 }).create().show();
     }
 
-    /**
-     * Requests location updates from the FusedLocationApi.
-     */
+    public void internetDialog(){
+        final Boolean isConnected = isNetworkAvailable();
+        new AlertDialog.Builder(this)
+                .setTitle("No Internet Connection")
+                .setMessage("Are you connected to the internet?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    if (isConnected) {
+                        arg0.dismiss();
+                    } else {
+                        arg0.dismiss();
+                        Intent intent = new Intent(NewLocationActivity.this, NewLocationActivity.class);
+                        intent.putExtra("ClientID", clientID);
+                        intent.putExtra("AppointmentID", appointmentID);
+                        startActivityForResult(intent, 0);
+                    }
+                    }
+                }).create().show();
+    }
+
+    private void sendLocations(){
+        SendLocations sendLocations = new SendLocations(NewLocationActivity.this);
+        api.setClient_id(clientID);
+        api.setAppointment_id(appointmentID);
+        api.setCREATE_LOCATION_URL();
+        sendLocations.execute(api.getCREATE_LOCATION_URL());
+    }
+
+    private class SendLocations extends UrlJsonAsyncTask {
+        public SendLocations(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            JSONObject holder = new JSONObject();
+            JSONObject taskObj = new JSONObject();
+            JSONObject json = new JSONObject();
+
+            Boolean isConnected = isNetworkAvailable();
+            if (isConnected) {
+
+                for (int i = 0; i < Locations.size(); i++) {
+                    /**
+                     * Requests location updates from the FusedLocationApi.
+                     */
+                    mLatitude = Locations.get(i).getLatitude();
+                    mLongitude = Locations.get(i).getLongitude();
+                    URL url = null;
+                    try {
+                        url = new URL(urls[0]);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setDoOutput(true);
+                        connection.setDoInput(true);
+                        connection.setInstanceFollowRedirects(false);
+                        connection.setRequestMethod("POST");
+                        connection.setRequestProperty("Content-Type", "application/json");
+                        connection.setRequestProperty("Accept", "application/json");
+                        connection.setRequestProperty("X-User-Email", mPreferences.getString("UserEmail", ""));
+                        connection.setRequestProperty("X-User-Token", mPreferences.getString("AuthToken", ""));
+                        connection.setUseCaches(false);
+
+                        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+
+                        json.put("success", false);
+                        json.put("info", "Something went wrong. Retry!");
+                        // add the user email and password to
+                        // the params
+                        taskObj.put("latitude", mLatitude);
+                        taskObj.put("longitude", mLongitude);
+                        holder.put("location", taskObj);
+
+                        wr.writeBytes(holder.toString());
+
+                        wr.flush();
+                        wr.close();
+
+                        BufferedReader br = new BufferedReader(new InputStreamReader(
+                                (connection.getInputStream())));
+
+                        String output;
+                        System.out.println("Output from Server .... \n");
+                        while ((output = br.readLine()) != null) {
+                            json = new JSONObject(output);
+                        }
+                    } catch (IOException e) {
+                        return json;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    //}
+                }
+            }
+            else{
+                internetDialog();
+            }
+            return json;
+        }
+    }
+
     protected void startLocationUpdates() {
         // The final argument to {@code requestLocationUpdates()} is a LocationListener
         // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
@@ -310,11 +419,6 @@ public class NewLocationActivity extends FragmentActivity implements
             JSONObject taskObj = new JSONObject();
             JSONObject json = new JSONObject();
 
-            ConnectivityManager connectivityManager
-                    = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-            Boolean isConnected = activeNetworkInfo.isConnectedOrConnecting();
-
             URL url = null;
             try {
                 url = new URL(urls[0]);
@@ -357,10 +461,17 @@ public class NewLocationActivity extends FragmentActivity implements
                     json = new JSONObject(output);
                 }
             } catch (IOException e) {
+                /*
+                Location tempLocation = null;
+                tempLocation.setLatitude(mLatitude);
+                tempLocation.setLongitude(mLongitude);
+                Locations.add(tempLocation);
+                */
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             return json;
             /*
             DefaultHttpClient client = new DefaultHttpClient();
@@ -509,10 +620,29 @@ public class NewLocationActivity extends FragmentActivity implements
         if (mCurrentLocation.distanceTo(location) > 100) {
             mCurrentLocation = location;
             mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-            updateUI();
-            Toast.makeText(this, getResources().getString(R.string.location_updated_message),
-                    Toast.LENGTH_SHORT).show();
+            Boolean isConnected = isNetworkAvailable();
+            if (!isConnected){
+                if (mCurrentLocation != null) {
+                    Location tempLocation = new Location(mCurrentLocation);
+                    Locations.add(tempLocation);
+                    mLongitude = mCurrentLocation.getLongitude();
+                    mLatitude = mCurrentLocation.getLatitude();
+                    setUpMapIfNeeded();
+                }
+            }
+            else {
+                updateUI();
+                Toast.makeText(this, getResources().getString(R.string.location_updated_message),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override

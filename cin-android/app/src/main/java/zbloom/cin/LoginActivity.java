@@ -1,9 +1,13 @@
 package zbloom.cin;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -73,6 +77,30 @@ public class LoginActivity extends Activity {
         }
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void internetDialog(){
+        final Boolean isConnected = isNetworkAvailable();
+        new AlertDialog.Builder(this)
+                .setTitle("No Internet Connection")
+                .setMessage("Are you connected to the internet?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        if (isConnected) {
+                            return;
+                        } else {
+                            internetDialog();
+                        }
+                    }
+                }).create().show();
+    }
+
     private class Login extends UrlJsonAsyncTask {
         public Login(Context context) {
             super(context);
@@ -86,50 +114,56 @@ public class LoginActivity extends Activity {
             String response = null;
             JSONObject json = new JSONObject();
 
-            URL url = null;
-            try {
-                url = new URL(urls[0]);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            try {
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoOutput(true);
-                connection.setDoInput(true);
-                connection.setInstanceFollowRedirects(false);
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setRequestProperty("Accept", "application/json");
-                connection.setUseCaches(false);
-
-                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-
-                json.put("success", false);
-                json.put("info", "Something went wrong. Retry!");
-                // add the user email and password to
-                // the params
-                userObj.put("email", mUserEmail);
-                userObj.put("password", mUserPassword);
-                userObj.put("company_id", mCompanyID);
-                holder.put("user", userObj);
-
-                wr.writeBytes(holder.toString());
-
-                wr.flush();
-                wr.close();
-
-                BufferedReader br = new BufferedReader(new InputStreamReader(
-                        (connection.getInputStream())));
-
-                String output;
-                System.out.println("Output from Server .... \n");
-                while ((output = br.readLine()) != null) {
-                    json = new JSONObject(output);
+            Boolean isConnected = isNetworkAvailable();
+            if (isConnected) {
+                URL url = null;
+                try {
+                    url = new URL(urls[0]);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                try {
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoOutput(true);
+                    connection.setDoInput(true);
+                    connection.setInstanceFollowRedirects(false);
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setRequestProperty("Accept", "application/json");
+                    connection.setUseCaches(false);
+
+                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+
+                    json.put("success", false);
+                    json.put("info", "Something went wrong. Retry!");
+                    // add the user email and password to
+                    // the params
+                    userObj.put("email", mUserEmail);
+                    userObj.put("password", mUserPassword);
+                    userObj.put("company_id", mCompanyID);
+                    holder.put("user", userObj);
+
+                    wr.writeBytes(holder.toString());
+
+                    wr.flush();
+                    wr.close();
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (connection.getInputStream())));
+
+                    String output;
+                    System.out.println("Output from Server .... \n");
+                    while ((output = br.readLine()) != null) {
+                        json = new JSONObject(output);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                internetDialog();
             }
             return json;
         }

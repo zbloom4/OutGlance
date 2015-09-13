@@ -1,8 +1,12 @@
 package zbloom.cin;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -75,14 +79,43 @@ public class CIN extends ActionBarActivity {
     public void onResume() {
         super.onResume();
 
-        if (mPreferences.contains("AuthToken"))
-        {
-            loadUserFromAPI(api.getSHOW_USER_URL());
+        Boolean isConnected = isNetworkAvailable();
+        if (mPreferences.contains("AuthToken")){
+            if(isConnected) {
+                loadUserFromAPI(api.getSHOW_USER_URL());
+            }
+            else{
+                internetDialog();
+            }
         }
         else {
             Intent intent = new Intent(CIN.this, LoginActivity.class);
             startActivityForResult(intent, 0);
         }
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void internetDialog() {
+        new AlertDialog.Builder(this)
+        .setTitle("No Internet Connection")
+        .setMessage("Please check your internet connection")
+        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                Boolean isConnected = isNetworkAvailable();
+                if (isConnected) {
+                    arg0.dismiss();
+                } else {
+                    arg0.dismiss();
+                    Intent intent = new Intent(CIN.this, CIN.class);
+                    startActivityForResult(intent, 0);
+                }
+            }
+        }).create().show();
     }
 
 
@@ -101,6 +134,7 @@ public class CIN extends ActionBarActivity {
         protected JSONObject doInBackground(String... urls) {
             JSONObject json = new JSONObject();
             StringBuffer response = new StringBuffer();
+
             URL url = null;
             try {
                 url = new URL(urls[0]);

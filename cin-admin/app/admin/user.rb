@@ -45,15 +45,19 @@ ActiveAdmin.register User do
 #        end
 #      end
 #    end
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @clients = user.clients
     @appointments = Array.new
     @clients.each do |client|
       @apps = client.appointments
       @apps.each do |appointment|
-        @appointments.push(appointment)
+        if (appointment.beginning.month == @date.month && appointment.clockIn && appointment.clockOut)
+          @appointments.push(appointment)
+        end
       end
     end
-    render partial: 'calendar/calendar', :locals => {:appointments => @appointments, :clients => @clients}
+    render partial: 'calendar/calendar', :locals => {:appointments => @appointments, :clients => @clients, :date => @date}
+
 
     @appointments = Array.new
     @clients.each do |client|

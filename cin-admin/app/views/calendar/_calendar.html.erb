@@ -1,16 +1,25 @@
-<%= month_calendar events: appointments do |date, appointments| %>
-  <%= date %>
+<h1>Appointments</h1>
 
-  <% appointments.each do |appointment| %>
-    <% clients.each do |client| %>
-      <% if client.id == appointment.client_id && appointment.clockIn && appointment.clockOut%>
-	    <div>
-	    <%= "#{client.first} #{client.last}: #{appointment.clockIn.strftime("%r")} - #{appointment.clockOut.strftime("%r")}" %>
-	    </div>
+<div id="appointments">
+	<h2 id="month">
+		<%= link_to "<", date: date.prev_month %>
+		<%= date.strftime("%B %Y") %>
+		<%= link_to ">", date: date.next_month %>
+	</h2>
+	<%= calendar date do |month| %>
+		<%= month.day %>
+		<% appointments.each do |appointment| %>
+	    <% clients.each do |client| %>
+	    	<% if ( appointment.beginning.day == month.day && appointment.client_id == client.id) %>
+			    <div>
+			    <%= "#{client.first} #{client.last}: #{appointment.clockIn.strftime("%r")} - #{appointment.clockOut.strftime("%r")}" %>
+			    </div>
+			<% end %>
+		<% end %>
 	  <% end %>
 	<% end %>
-  <% end %>
-<% end %>
+</div>
+
 
 <a href="#" onclick="window.print();return false;">
 print me
